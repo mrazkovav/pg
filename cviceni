@@ -1,0 +1,16 @@
+def cislo_mensi_nez_3(hodnota):
+    if hodnota > 3: 
+        print(f"hodnota {hodnota} je vetsi nez 3")
+    elif hodnota < 3
+        print(f"hodnota {hodnota} je mensi nez 3")
+    else:
+        print(f"hodnota {hodnota} je rovna 3")
+
+
+
+cislo = input("zadej cislo: ")
+cislo = int(cislo)
+print(f"zadane cislo je: {cislo}")
+
+cislo_mensi_nez_3(1)
+cislo_mensi_nez_3(cislo)
