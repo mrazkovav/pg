@@ -1,6 +1,13 @@
-# funkce zkontroluje, zda je cislo sude nebo liche
-# a vypise:
-#  - "cislo x je sude"
-# - "cislo x je liche"
-def sudy_nebo_lichy(cislo):
-     pass
+def sude_nebo_liche(cislo):
+    if cislo % 2 == 0:
+        print(f"cislo {cislo} je sude")
+    else:
+        print(f"cislo {cislo} je liche")
+
+
+cislo = input("zadej cislo: ")
+cislo = int(cislo)
+print(f"zadane cislo je: {cislo}")
+sude_nebo_liche(cislo)
+sude_nebo_liche(5)
+sude_nebo_liche(1_000_000)
