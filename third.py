@@ -43,7 +43,7 @@ def vrat_prvocisla(maximum):
     prvocisla = []
     # prochází se všechna čísla v rozmezí 1 až maximum
     # a testují se, zda se jedná o prvočísla
-    for i in range(1, int(maximum)):
+    for i in range(2, int(maximum)):
         # test zda se jedná o prvočíslo
         # pokud ano, přidá se do seznamu prvočísel
         if je_prvocislo(i):
