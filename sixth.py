@@ -1,5 +1,6 @@
 import sys
 import requests
+import re
 
 
 def download_url_and_get_all_hrefs(url):
@@ -10,6 +11,12 @@ def download_url_and_get_all_hrefs(url):
     <a href="url">odkaz</a> a z nich nactete url, ktere vratite jako seznam pomoci return
     """
     hrefs = []
+    response = requests.get(url)
+    if response.status_code != 200:
+        raise Exception(f"odpoved skoncila chybovym statusem {response.status_code}")
+ 
+    html = response.content.decode(errors="ignore")
+    hrefs = re.findall(r'<a\s+[^>]*href=["\'](.*?)["\']', html, re.IGNORECASE)
 
     return hrefs
 
@@ -17,7 +24,9 @@ def download_url_and_get_all_hrefs(url):
 if __name__ == "__main__":
     try:
         url = sys.argv[1]
-        download_url_and_get_all_hrefs(url)
+        hrefs =  download_url_and_get_all_hrefs(url)
+        for href in hrefs:
+            print(href)
     # osetrete potencialni chyby pomoci vetve except
     except Exception as e:
         print(f"Program skoncil chybou: {e}")
