@@ -1,4 +1,6 @@
 def je_prvocislo(cislo):
+    if cislo < 2:
+        return False
     """
     Funkce overi, zda zadane cislo je nebo neni prvocislo a vrati True nebo False
 
@@ -17,6 +19,7 @@ def je_prvocislo(cislo):
     36 * 1
     Jak vidite v druhe polovine se dvojice opakuji, tzn. v tomto pripade staci overit delitelnost pouze do 6 (vcetne)
     """
+
     # předpokládáme, že se jedná o prvočíslo, která následně testujeme
     prvocislo = True
     # projdeme čísla od 2 až do poloviny testovaného čísla
@@ -31,7 +34,7 @@ def je_prvocislo(cislo):
         # a tudíš se nejedná o prvočíslo => změna na False
         # takto se testované číslo pokusíme vydělit všemi čísly v daném rozmezí
         # a stačí pouze jedno dělení beze zbytku a nejedná se o prvočíslo
-        if not(cislo % i):
+        if not cislo % i == 0:
             prvocislo = False
     # vracíme výsledek testu True/False
     return prvocislo
@@ -43,7 +46,7 @@ def vrat_prvocisla(maximum):
     prvocisla = []
     # prochází se všechna čísla v rozmezí 1 až maximum
     # a testují se, zda se jedná o prvočísla
-    for i in range(2, int(maximum)):
+    for i in range(1, int(maximum) + 1):
         # test zda se jedná o prvočíslo
         # pokud ano, přidá se do seznamu prvočísel
         if je_prvocislo(i):
