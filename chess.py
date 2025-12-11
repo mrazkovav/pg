@@ -4,7 +4,7 @@ class Piece(ABC):
     def __init__(self, color, position):
         """
         Inicializuje šachovou figurku.
-        
+
         :param color: Barva figurky ('white' nebo 'black').
         :param position: Aktuální pozice na šachovnici jako tuple (row, col).
         """
@@ -13,12 +13,7 @@ class Piece(ABC):
 
     @abstractmethod
     def possible_moves(self):
-        """
-        Vrací všechny možné pohyby figurky.
-        Musí být implementováno v podtřídách.
-        
-        :return: Seznam možných pozic [(row, col), ...].
-        """
+        """Vrací všechny možné pohyby figurky."""
         pass
 
     @staticmethod
@@ -41,56 +36,40 @@ class Piece(ABC):
         return f'Piece({self.color}) at position {self.position}'
 
 
+
 class Pawn(Piece):
     def possible_moves(self):
-        return []
-    
+        row, col = self.position
+        moves = []
+
+       
+        if self.color == "white":
+            move = (row + 1, col)
+            if self.is_position_on_board(move):
+                moves.append(move)
+
+       
+        elif self.color == "black":
+            move = (row - 1, col)
+            if self.is_position_on_board(move):
+                moves.append(move)
+
+        return moves
+
     def __str__(self):
         return f'Pawn({self.color}) at position {self.position}'
 
 
-class Knight(Piece):
-    def possible_moves(self):
-        """
-        Vrací všechny možné tahy jezdce.
-        
-        :return: Seznam možných pozic [(row, col), ...].
-        """
-        row, col = self.position
-        moves = [
-            (row + 2, col + 1), (row + 2, col - 1),
-            (row - 2, col + 1), (row - 2, col - 1),
-            (row + 1, col + 2), (row + 1, col - 2),
-            (row - 1, col + 2), (row - 1, col - 2)
-        ]
-        # Filtruje tahy, které jsou mimo šachovnici
-        final_moves = []
-        for move in moves:
-            if self.is_position_on_board(move):
-                final_moves.append(move)
-        return final_moves
-
-    def __str__(self):
-        return f'Knight({self.color}) at position {self.position}'
 
 
 class Bishop(Piece):
-    pass
+    def possible_moves(self):
+        row, col = self.position
+        moves = []
 
-
-class Rook(Piece):
-    pass
-
-
-class Queen(Piece):
-    pass
-
-
-class King(Piece):
-    pass
-
-
-if __name__ == "__main__":
-    piece = Knight("black", (1, 2))
-    print(piece)
-    print(piece.possible_moves())
+      
+        for dr, dc in [(1,1), (1,-1), (-1,1), (-1,-1)]:
+            for step in range(1, 8):
+                move = (row + dr * step, col + dc * step)
+                if self.is_position_on_board(move):
+                    moves.append(move)
