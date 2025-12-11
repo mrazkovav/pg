@@ -4,8 +4,8 @@ class ChybnaSuma(Exception):
 
 
 class BankovniUcet:
-    def __init__(self, jemno):
-        self.jmeno = jemno
+    def __init__(self, jmeno):
+        self.jmeno = jmeno
         self.zustatek = 0
 
 
