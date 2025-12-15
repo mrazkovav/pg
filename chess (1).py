@@ -43,7 +43,22 @@ class Piece(ABC):
 
 class Pawn(Piece):
     def possible_moves(self):
-        return []
+        row, col = self.position
+        moves = []
+
+        if self.color == "white":
+            move = (row + 1, col)
+        else:  # black
+            move = (row - 1, col)
+
+        if self.is_position_on_board(move):
+            moves.append(move)
+
+        return moves
+
+    def __str__(self):
+        return f'Pawn({self.color}) at position {self.position}'
+
     
     def __str__(self):
         return f'Pawn({self.color}) at position {self.position}'
@@ -75,22 +90,136 @@ class Knight(Piece):
 
 
 class Bishop(Piece):
-    pass
+    def possible_moves(self):
+        row, col = self.position
+        moves = []
+
+        for i in range(1, 8):
+            possible = [
+                (row + i, col + i),
+                (row + i, col - i),
+                (row - i, col + i),
+                (row - i, col - i)
+            ]
+            for pos in possible:
+                if self.is_position_on_board(pos):
+                    moves.append(pos)
+
+        return moves
+
+    def __str__(self):
+        return f'Bishop({self.color}) at position {self.position}'
+
 
 
 class Rook(Piece):
-    pass
+    def possible_moves(self):
+        row, col = self.position
+        moves = []
+
+        for i in range(1, 8):
+            possible = [
+                (row + i, col),
+                (row - i, col),
+                (row, col + i),
+                (row, col - i)
+            ]
+            for pos in possible:
+                if self.is_position_on_board(pos):
+                    moves.append(pos)
+
+        return moves
+
+    def __str__(self):
+        return f'Rook({self.color}) at position {self.position}'
 
 
 class Queen(Piece):
-    pass
+    def possible_moves(self):
+        row, col = self.position
+        moves = []
+
+        for i in range(1, 8):
+            possible = [
+                (row + i, col),
+                (row - i, col),
+                (row, col + i),
+                (row, col - i),
+                (row + i, col + i),
+                (row + i, col - i),
+                (row - i, col + i),
+                (row - i, col - i)
+            ]
+            for pos in possible:
+                if self.is_position_on_board(pos):
+                    moves.append(pos)
+
+        return moves
+
+    def __str__(self):
+        return f'Queen({self.color}) at position {self.position}'
+
 
 
 class King(Piece):
-    pass
+    def possible_moves(self):
+        row, col = self.position
+        moves = []
+
+        possible = [
+            (row + 1, col),
+            (row - 1, col),
+            (row, col + 1),
+            (row, col - 1),
+            (row + 1, col + 1),
+            (row + 1, col - 1),
+            (row - 1, col + 1),
+            (row - 1, col - 1)
+        ]
+
+        for pos in possible:
+            if self.is_position_on_board(pos):
+                moves.append(pos)
+
+        return moves
+
+    def __str__(self):
+        return f'King({self.color}) at position {self.position}'
+
 
 
 if __name__ == "__main__":
+
+    piece = Pawn("white", (2, 2))
+    print(piece)
+    print(piece.possible_moves())
+    print()
+
+    piece = Pawn("black", (7, 2))
+    print(piece)
+    print(piece.possible_moves())
+    print()
+
     piece = Knight("black", (1, 2))
+    print(piece)
+    print(piece.possible_moves())
+    print()
+
+    piece = Bishop("white", (4, 4))
+    print(piece)
+    print(piece.possible_moves())
+    print()
+
+    piece = Rook("black", (4, 4))
+    print(piece)
+    print(piece.possible_moves())
+    print()
+
+    piece = Queen("white", (4, 4))
+    print(piece)
+    print(piece.possible_moves())
+    print()
+
+    piece = King("black", (4, 4))
     print(piece)
     print(piece.possible_moves())
