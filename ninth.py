@@ -2,7 +2,17 @@ def dec_to_bin(cislo):
     # funkce prevede cislo na binarni reprezentaci (cislo muze byt str i int!!!)
     # 7 -> "111"
     # 5 -> "101"
-    return "0"
+    cislo = int(cislo)
+
+    if cislo == 0:
+        return "0"
+
+    vysledek = ""
+    while cislo > 0:
+        vysledek = str(cislo % 2) + vysledek
+        cislo //= 2
+
+    return vysledek
 
 
 def test_bin_to_dec():
